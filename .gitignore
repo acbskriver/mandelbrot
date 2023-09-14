@@ -1,4 +1,6 @@
 trained_models/
+.python-version
 
-*ipynb_checkpoints
-*python-version
+**/*.egg-info/
+**/.ipynb_checkpoints/
+**/.DS_Store
