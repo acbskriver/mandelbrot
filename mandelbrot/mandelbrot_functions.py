@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from typing import Tuple
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, LeakyReLU
+from tensorflow.keras.optimizers.legacy import Adam
 
 
 def mandelbrot_dataset_creator(
@@ -89,3 +92,19 @@ def plot_mandelbrot_dataset(
     plt.show
 
     return None
+
+
+def initialize_model():
+    """Create model architecture"""
+
+    model = Sequential()
+
+    model.add(Dense(32, activation=LeakyReLU(), input_shape=(2,)))
+    model.add(Dense(32, activation=LeakyReLU(alpha=0.01)))
+    model.add(Dense(32, activation=LeakyReLU(alpha=0.01)))
+    model.add(Dense(32, activation=LeakyReLU(alpha=0.01)))
+    model.add(Dense(1, activation="sigmoid"))
+
+    model.compile(loss="mse", optimizer=Adam(learning_rate=0.001), metrics=["mae"])
+
+    return model
